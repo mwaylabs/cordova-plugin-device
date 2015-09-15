@@ -42,7 +42,11 @@ function Device() {
     this.cordova = null;
     this.model = null;
     this.manufacturer = null;
-
+    this.appIdentifier = null;
+    this.deviceName = null;
+    this.appVersionName = null;
+    this.appVersionCode = null;
+    this.name = null;
     var me = this;
 
     channel.onCordovaReady.subscribe(function() {
@@ -57,6 +61,10 @@ function Device() {
             me.cordova = buildLabel;
             me.model = info.model;
             me.manufacturer = info.manufacturer || 'unknown';
+            me.appIdentifier = info.appIdentifier;
+            me.appVersionName = info.appVersionName;
+            me.appVersionCode = info.appVersionCode;
+            me.name = info.name;
             channel.onCordovaInfoReady.fire();
         },function(e) {
             me.available = false;

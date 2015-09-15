@@ -67,6 +67,26 @@ exports.defineAutoTests = function() {
       expect(window.device.manufacturer).toBeDefined();
       expect((new String(window.device.manufacturer)).length > 0).toBe(true);
     });
+
+    it("should contain a appIdentifier property that is a string", function() {
+      expect(window.device.appIdentifier).toBeDefined();
+      expect((new String(window.device.appIdentifier)).length > 0).toBe(true);
+    });
+
+    it("should contain a appVersionName property that is a string", function() {
+      expect(window.device.appVersionName).toBeDefined();
+      expect((new String(window.device.appVersionName)).length > 0).toBe(true);
+    });
+
+    it("should contain a appVersionCode property that is a string", function() {
+      expect(window.device.appVersionCode).toBeDefined();
+      expect((new String(window.device.appVersionCode)).length > 0).toBe(true);
+    });
+
+    it("should contain a appVersionCode property that is a string", function() {
+      expect(window.device.name).toBeDefined();
+      expect((new String(window.device.name)).length > 0).toBe(true);
+    });
   });
 };
 
