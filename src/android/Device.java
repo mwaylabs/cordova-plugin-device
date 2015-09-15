@@ -153,6 +153,41 @@ public class Device extends CordovaPlugin {
         TimeZone tz = TimeZone.getDefault();
         return (tz.getID());
     }
+    
+    public String getAppIdentifier() {
+    	String appIdentifier = getApplicationContext().getPackageName();
+        return appIdentifier;
+    }
+    
+    public String getAppVersionName() {
+    	String versionName = null;
+    	try {
+			PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+			versionName = pInfo.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+        return versionName;
+    }
+    
+    public int getAppVersionCode() {
+    	int versionCode = -1;
+    	try {
+			PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+			versionCode = pInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+        return versionCode;
+    }
+    
+    public String getName() {
+        BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
+        String name = myDevice.getName();     
+        return name;
+    }
 
     public String getAppIdentifier() {
     	String appIdentifier = this.cordova.getActivity().getApplicationContext().getPackageName();
