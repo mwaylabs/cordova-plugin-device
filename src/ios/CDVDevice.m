@@ -80,7 +80,10 @@
     [devProps setObject:@"iOS" forKey:@"platform"];
     [devProps setObject:[device systemVersion] forKey:@"version"];
     [devProps setObject:[self uniqueAppInstanceIdentifier:device] forKey:@"uuid"];
-    [devProps setObject:[[self class] cordovaVersion] forKey:@"cordova"];
+    [devProps setObject:[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"] forKey:@"appIdentifier"];
+    [devProps setObject:[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"appVersionName"];
+    [devProps setObject:[[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey] forKey:@"appVersionCode"];
+    [devProps setObject:[[[UIDevice currentDevice] name] forKey:@"name"];
 
     NSDictionary* devReturn = [NSDictionary dictionaryWithDictionary:devProps];
     return devReturn;
