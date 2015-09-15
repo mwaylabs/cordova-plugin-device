@@ -43,7 +43,6 @@ function Device() {
     this.model = null;
     this.manufacturer = null;
     this.appIdentifier = null;
-    this.deviceName = null;
     this.appVersionName = null;
     this.appVersionCode = null;
     this.name = null;
