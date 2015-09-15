@@ -28,6 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+
 import android.provider.Settings;
 
 public class Device extends CordovaPlugin {
@@ -74,6 +78,10 @@ public class Device extends CordovaPlugin {
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
             r.put("manufacturer", this.getManufacturer());
+            r.put("appIdentifier", this.getAppIdentifier());
+            r.put("appVersionName", this.getAppVersionName());
+            r.put("appVersionCode", this.getAppVersionCode());
+            r.put("name", this.getName());
             callbackContext.success(r);
         }
         else {
@@ -144,6 +152,41 @@ public class Device extends CordovaPlugin {
     public String getTimeZoneID() {
         TimeZone tz = TimeZone.getDefault();
         return (tz.getID());
+    }
+    
+    public String getAppIdentifier() {
+    	String appIdentifier = getApplicationContext().getPackageName();
+        return appIdentifier;
+    }
+    
+    public String getAppVersionName() {
+    	String versionName = null;
+    	try {
+			PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+			versionName = pInfo.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+        return versionName;
+    }
+    
+    public int getAppVersionCode() {
+    	int versionCode = -1;
+    	try {
+			PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+			versionCode = pInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+        return versionCode;
+    }
+    
+    public String getName() {
+        BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
+        String name = myDevice.getName();     
+        return name;
     }
 
     /**
